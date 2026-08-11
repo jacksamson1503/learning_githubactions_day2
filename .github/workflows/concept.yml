@@ -1,0 +1,24 @@
+name: Context demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  info:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Repo
+        run: echo "${{ github.repository }}"
+
+      - name: Print User
+        run: echo "${{ github.actor }}"
+
+      - name: Print Branch
+        run: echo "${{ github.ref }}"
+
+      - name: Print Runner OS
+        run: echo "${{ runner.os }}"
+
+      - name: This is the last point
+        run: echo "This process is completed"
