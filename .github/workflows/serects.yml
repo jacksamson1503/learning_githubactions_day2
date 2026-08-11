@@ -1,17 +1,31 @@
-name: Secrets demo
+```yaml
+name: secrets
 
 on:
   workflow_dispatch:
 
 jobs:
-  secrets:
+  job1:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Read Variable
-        run: echo "${{ vars.COMPANY_NAME }}"
-
-      - name: Read Secret
+      - name: check whether the secret is available
         env:
-          AWS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-        run: echo "Secret loaded successfully"
+          API_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        run: |
+          if [ -z "$API_KEY" ]; then
+            echo "Secret AWS_ACCESS_KEY is not there. Check the GitHub Secrets."
+          fi
+
+          echo "Secret is available. Length is ${#API_KEY} characters."
+
+      - name: check whether variable is there in the GitHub
+        env:
+          VAR_KEY: ${{ vars.AWS_VAR_KEY }}
+        run: |
+          if [ -z "$VAR_KEY" ]; then
+            echo "Variable is not there in the GitHub."
+          fi
+
+          echo "Variable is there and the length is ${#VAR_KEY}."
+```
