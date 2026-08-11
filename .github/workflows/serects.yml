@@ -1,0 +1,17 @@
+name: Secrets demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Read Variable
+        run: echo "${{ vars.COMPANY_NAME }}"
+
+      - name: Read Secret
+        env:
+          AWS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        run: echo "Secret loaded successfully"
