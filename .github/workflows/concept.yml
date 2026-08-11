@@ -3,6 +3,9 @@ name: Context demo
 on:
   workflow_dispatch:
 
+env:
+  APP_NAME: Netflix
+
 jobs:
   info:
     runs-on: ubuntu-latest
@@ -17,17 +20,17 @@ jobs:
       - name: Print Branch
         run: echo "${{ github.ref }}"
 
-      - name: Print ref
-        run: echo "$ {{ github.ref }}"
+      - name: Print Ref
+        run: echo "${{ github.ref }}"
 
-      - name: Print sha
-        run: echo "$ {{ github.sha }}"
+      - name: Print SHA
+        run: echo "${{ github.sha }}"
 
-      - name: Print variable
-        run: echo "$ {{ env.APP_NAME}}"
+      - name: Print Variable
+        run: echo "${{ env.APP_NAME }}"
 
-      - name: Print serects
-        run: echo "$ {{ serects.API_KEY}}"
+      - name: Print Secret
+        run: echo "${{ secrets.API_KEY }}"
 
       - name: Print Runner OS
         run: echo "${{ runner.os }}"
