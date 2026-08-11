@@ -17,6 +17,18 @@ jobs:
       - name: Print Branch
         run: echo "${{ github.ref }}"
 
+      - name: Print ref
+        run: echo "$ {{ github.ref }}"
+
+      - name: Print sha
+        run: echo "$ {{ github.sha }}"
+
+      - name: Print variable
+        run: echo "$ {{ env.APP_NAME}}"
+
+      - name: Print serects
+        run: echo "$ {{ serects.API_KEY}}"
+
       - name: Print Runner OS
         run: echo "${{ runner.os }}"
 
