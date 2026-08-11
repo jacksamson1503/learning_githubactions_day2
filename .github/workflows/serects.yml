@@ -1,4 +1,3 @@
-```yaml
 name: secrets
 
 on:
@@ -28,4 +27,4 @@ jobs:
           fi
 
           echo "Variable is there and the length is ${#VAR_KEY}."
-```
+
