@@ -1,44 +1,46 @@
-name: node CI(first)
+name: Node CI (First)
 
 on:
   push:
     branches: [main]
+
   pull_request:
     branches: [main]
-  workflow_dispacth:
+
+  workflow_dispatch:
 
 env:
   NODE_VERSION: 20
 
 jobs:
   build-test:
-    name: build & test
+    name: Build & Test
     runs-on: ubuntu-latest
 
-  defaults:
-    run:
-      working-directory: sample-app
+    defaults:
+      run:
+        working-directory: sample-app
 
-  steps:
-    - name: check the completed"
-      uses: actions/checkout@v5
-    
-    - name: set up Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-        cache-dependency-path: 'sample-app/package-lock.json'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
 
-    - name: install dependies
-      run: npm install
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: sample-app/package-lock.json
 
-    - name: run lint test
-      run: npm run lint
+      - name: Install Dependencies
+        run: npm install
 
-    - name: run tests
-      run: npm test
+      - name: Run Lint
+        run: npm run lint
 
-    - name: summary
-      run: |
-        echo "pipeline finished for the commit ${{ github.sha}}"
+      - name: Run Tests
+        run: npm test
+
+      - name: Summary
+        run: |
+          echo "Pipeline finished for commit ${{ github.sha }}"
