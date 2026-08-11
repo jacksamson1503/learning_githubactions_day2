@@ -1,0 +1,44 @@
+name: node CI(first)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispacth:
+
+env:
+  NODE_VERSION: 20
+
+jobs:
+  build-test:
+    name: build & test
+    runs-on: ubuntu-latest
+
+  defaults:
+    run:
+      working-directory: sample-app
+
+  steps:
+    - name: check the completed"
+      uses: actions/checkout@v5
+    
+    - name: set up Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: 'sample-app/package-lock.json'
+
+    - name: install dependies
+      run: npm install
+
+    - name: run lint test
+      run: npm run lint
+
+    - name: run tests
+      run: npm test
+
+    - name: summary
+      run: |
+        echo "pipeline finished for the commit ${{ github.sha}}"
